@@ -4,3 +4,5 @@ The first is red/black trees - implemented pretty much straight out of the wikip
 
 To do: skip lists (need to work out the choice of levels) and bloom filters (need seven fast hashes.)
 To do: some concurrent or non-blocking structures like queues.
+
+dfg

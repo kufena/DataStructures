@@ -6,6 +6,9 @@ using DataStructures;
 
 namespace DataStructuresTest
 {
+    /**
+     * Tests for red/black trees.
+     */
     class RedBlackTreeTest
     {
         [SetUp]

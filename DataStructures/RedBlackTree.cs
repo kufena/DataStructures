@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DataStructures
 {
+    /**
+     * Red/Black tree implementation more or less lifted from wikipedia.
+     * Not particularly OO at the moment.
+     */
     public class RedBlackTree<K, V> where K : IComparable
     {
 
