@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using DataStructures;
+using System.Diagnostics;
 
 namespace DataStructuresTest
 {
@@ -84,16 +85,42 @@ namespace DataStructuresTest
         public void insert_1000_out_of_order()
         {
             RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
+            Dictionary<int, int> dict = new Dictionary<int, int>();
 
+            Stopwatch sp = new Stopwatch();
+
+            int amount = 10000000;
             int count = 0;
             int start = 0;
             int step = 37;
-            while(count < 1000)
+
+            int[] keys = new int[amount];
+            int[] vals = new int[amount];
+            while (count < amount)
             {
-                tree.insert(start, 1000 - start);
-                start = (start + step) % 1000;
+                keys[count] = start = (start + step) % amount;
+                vals[count] = amount - keys[count];
                 count++;
             }
+
+            count = 0;
+            sp.Start();
+            for (count = 0; count < amount; count++)
+            {
+                tree.insert(keys[count], vals[count]);
+            }
+            sp.Stop();
+            long rbinterval = sp.ElapsedMilliseconds;
+
+            sp.Reset();
+
+            sp.Start();
+            for (count = 0; count < amount; count++)
+            {
+                dict.Add(keys[count],vals[count]);
+            }
+            sp.Stop();
+            long dictinterval = sp.ElapsedMilliseconds;
 
             Assert.Pass();
         }
