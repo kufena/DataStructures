@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-
+using System.Text;
 using DataStructures;
 
 namespace SimpleTestProgram
@@ -10,34 +10,23 @@ namespace SimpleTestProgram
     {
         static void Main(string[] args)
         {
-            RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
-            Dictionary<int, int> dict = new Dictionary<int, int>();
+            double p = 0.001;
+            int n = 1000000;
+            int size = BloomFilter.determine_size(n, p);
+            Console.WriteLine("Size required for 1000 items with P=0.01 is " + size);
+            Console.WriteLine("Hashes required for 1000 items and 64bit hash." + BloomFilter.hashes_required(n, size));
 
-            Stopwatch sp = new Stopwatch();
+            var bl = new BloomFilter(n, p);
+            string s = "Andrew Douglas";
+            string t = "Jimbob Reynolds";
+            byte[] sb = Encoding.ASCII.GetBytes(s);
+            byte[] tb = Encoding.ASCII.GetBytes(t);
 
-            int amount = 10000000;
-            int count = 0;
-            int start = 0;
-            int step = 37;
+            bl.add(sb);
 
-            int[] keys = new int[amount];
-            int[] vals = new int[amount];
-            while (count < amount)
-            {
-                keys[count] = start = (start + step) % amount;
-                vals[count] = amount - keys[count];
-                count++;
-            }
+            Console.WriteLine("Can we find \"" + s + "\"? " + bl.check(sb));
+            Console.WriteLine("Can we find \"" + t + "\"? " + bl.check(tb));
 
-            count = 0;
-            sp.Start();
-            for (count = 0; count < amount; count++)
-            {
-                tree.insert(keys[count], vals[count]);
-                //dict.Add(keys[count], vals[count]);
-            }
-            sp.Stop();
-            long rbinterval = sp.ElapsedMilliseconds;
             Console.WriteLine("Hello World!");
         }
     }
