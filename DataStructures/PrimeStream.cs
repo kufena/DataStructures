@@ -21,7 +21,7 @@ namespace DataStructures
         {
             List<int> primes;
             int counter;
-            int local_current = -1;
+            int local_current = 1;
 
             public StreamPrimes()
             {
@@ -34,13 +34,19 @@ namespace DataStructures
 
             void IDisposable.Dispose()
             {
-                throw new NotImplementedException();
+                ;
             }
 
+            /*
+             * Sieve of erastothenes, essentially, but in re-entrant form.
+             * That is, find a number from (current prime + 1) that is not divisible
+             * by all the previous primes.
+             * 
+             * counter is that (current prime + 1) but is a class variable.
+             */
             bool IEnumerator.MoveNext()
             {
                 bool next = false;
-                // sieve of erastothenes, essentially.
                 while(true)
                 {
                     next = true;
