@@ -18,7 +18,7 @@ namespace DataStructuresTest
         [Test]
         public void add_some_and_find_some()
         {
-            SkipList<int, long> skippy = new SkipList<int,long>(int.MinValue, int.MaxValue, 1001);
+            SkipList<int, long> skippy = new SkipList<int,long>(int.MinValue, int.MaxValue, 1024, 1001);
             skippy.insert(10, 1000L);
             skippy.insert(15, 1500L);
             skippy.insert(5, 500L);
@@ -29,7 +29,7 @@ namespace DataStructuresTest
         public void add_lots()
         {
             Random r = new Random(1001);
-            int n = 10000;
+            int n = 1000000;
             int[] keys = new int[n];
             long[] vals = new long[n];
             for(int i = 0; i < n; i++)
@@ -41,7 +41,7 @@ namespace DataStructuresTest
             long x;
             int ok = 0;
             int clash = 0;
-            SkipList<int, long> skippy = new SkipList<int, long>(-1, int.MaxValue,2003);
+            SkipList<int, long> skippy = new SkipList<int, long>(-1, int.MaxValue, n, 2003);
 
             Stopwatch sp = new Stopwatch();
             sp.Start();
@@ -54,6 +54,7 @@ namespace DataStructuresTest
                     ok++;
             }
             sp.Stop();
+            long inserttime = sp.ElapsedMilliseconds;
 
             long[] times = new long[n];
 

@@ -21,21 +21,21 @@ namespace DataStructures
         SkipNode HEAD;
         SkipNode NIL;
 
-        public SkipList(K min, K max)
+        public SkipList(K min, K max, int size)
         {
             Rand = new Random();
-            setUp(max, min);
+            setUp(max, min, size);
         }
 
-        public SkipList(K min, K max, int seed)
+        public SkipList(K min, K max, int size, int seed)
         {
             Rand = new Random(seed);
-            setUp(max, min);
+            setUp(max, min, size);
         }
 
-        private void setUp(K max, K min)
+        private void setUp(K max, K min, int size)
         {
-            MaxLevel = 10;
+            MaxLevel = (int) (Math.Floor(Math.Log(size) / Math.Log(2)) + 1);
             HEAD = new SkipNode(min, default(V), MaxLevel - 1, MaxLevel);
             NIL = new SkipNode(max, default(V), 0, MaxLevel);
             for(int i = 0; i<MaxLevel; i++) HEAD.setLevel(NIL, i);
