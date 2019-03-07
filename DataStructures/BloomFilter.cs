@@ -37,6 +37,7 @@ namespace DataStructures
         }
 
         byte[] bit_array;
+        
         IMurmurHash3[] hash_functions;
         int bits;
         int n;

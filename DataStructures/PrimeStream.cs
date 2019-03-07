@@ -47,11 +47,13 @@ namespace DataStructures
             bool IEnumerator.MoveNext()
             {
                 bool next = false;
+                int iters = 0;
                 while(true)
                 {
                     next = true;
                     foreach(int p in primes)
                     {
+                        iters++;
                         if (counter % p == 0)
                         {
                             next = false;
@@ -64,6 +66,8 @@ namespace DataStructures
                         primes.Add(counter);
                         local_current = counter;
                         counter++;
+                        Console.WriteLine("Iterations before prime found = " + iters);
+                        iters = 0;
                         return true;
                     }
                     else
