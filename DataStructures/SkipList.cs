@@ -12,7 +12,7 @@ namespace DataStructures
      * for these in the constructor.  This doesn't seem right, but allows us to not have to keep checking for NIL
      * and HEAD.
      */
-    class SkipList<K,V> where K : IComparable<K>
+    public class SkipList<K,V> where K : IComparable<K>
     {
 
         Random Rand;
@@ -21,13 +21,13 @@ namespace DataStructures
         SkipNode HEAD;
         SkipNode NIL;
 
-        public SkipList(K max, K min)
+        public SkipList(K min, K max)
         {
             Rand = new Random();
             setUp(max, min);
         }
 
-        public SkipList(int seed, K max, K min)
+        public SkipList(K min, K max, int seed)
         {
             Rand = new Random(seed);
             setUp(max, min);
@@ -35,17 +35,17 @@ namespace DataStructures
 
         private void setUp(K max, K min)
         {
-            HEAD = new SkipNode(min, default(V), MaxLevel - 1);
-            NIL = new SkipNode(max, default(V), 0);
-            for(int i = 0; i<MaxLevel; i++) HEAD.setLevel(NIL, i);
             MaxLevel = 10;
+            HEAD = new SkipNode(min, default(V), MaxLevel - 1, MaxLevel);
+            NIL = new SkipNode(max, default(V), 0, MaxLevel);
+            for(int i = 0; i<MaxLevel; i++) HEAD.setLevel(NIL, i);
         }
 
         int newLevel()
         {
             double step = Rand.NextDouble();
             int level = 0;
-            while ((step = Rand.NextDouble()) > 0.5 && level < MaxLevel)
+            while ((step = Rand.NextDouble()) > 0.5 && level < (MaxLevel-1))
             {
                 level++;
             }
@@ -57,12 +57,12 @@ namespace DataStructures
             SkipNode x = HEAD;
             for (int i = MaxLevel-1; i >= 0; i--)
             {
-                while (x.levels[i].key.CompareTo(key) > 0)
+                while (x.levels[i].key.CompareTo(key) < 0)
                 {
                     x = x.levels[i];
                 }
             }
-            if (x.levels[1].key.CompareTo(key) == 0)
+            if (x.levels[0].key.CompareTo(key) == 0)
                 return Option<V>.Some(x.levels[0].value);
             else
                 return Option<V>.None(); // default(V);
@@ -71,9 +71,10 @@ namespace DataStructures
         public V insert(K key, V value)
         {
             SkipNode[] update = new SkipNode[MaxLevel];
-            var x = HEAD; for (int i = MaxLevel - 1; i >= 0; i--)
+            var x = HEAD;
+            for (int i = MaxLevel - 1; i >= 0; i--)
             {
-                while (x.levels[i].key.CompareTo(key) > 0)
+                while (x.levels[i].key.CompareTo(key) < 0)
                 {
                     x = x.levels[i];
                 }
@@ -89,10 +90,10 @@ namespace DataStructures
             else
             {
                 var newlevel = newLevel();
-                var newnode = new SkipNode(key, value, newlevel);
+                var newnode = new SkipNode(key, value, newlevel, MaxLevel);
                 for (int i = 0; i <= newlevel; i++)
                 {
-                    x.levels[i] = update[i].levels[i];
+                    newnode.levels[i] = update[i].levels[i];
                     update[i].levels[i] = newnode;
                 }
             }
@@ -107,11 +108,12 @@ namespace DataStructures
 
             public SkipNode[] levels;
 
-            public SkipNode(K k, V v, int l)
+            public SkipNode(K k, V v, int l, int maxl)
             {
                 key = k;
                 value = v;
                 level = l;
+                levels = new SkipNode[maxl];
             }
 
             public void setLevel(SkipNode sn, int i)

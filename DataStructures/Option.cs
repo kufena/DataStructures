@@ -8,7 +8,7 @@ namespace DataStructures
     /*
      * A nice implementation of Option, found at http://codinghelmet.com/articles/custom-implementation-of-the-option-maybe-type-in-cs
      */
-    class Option<T> : IEnumerable<T>
+    public class Option<T> : IEnumerable<T>
     {
         public T[] Content { get; }
 
