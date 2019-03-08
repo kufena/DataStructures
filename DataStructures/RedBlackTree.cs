@@ -19,6 +19,26 @@ namespace DataStructures
         {
         }
 
+        public Option<V> search(K key)
+        {
+            Node x = root;
+
+            while (!x.leaf)
+            {
+                if (x.key.CompareTo(key) == 0)
+                    return Option<V>.Some(x.value);
+                else
+                {
+                    if (x.key.CompareTo(key) > 0)
+                        x = x.left;
+                    else
+                        x = x.right;
+                }
+            }
+
+            return Option<V>.None();
+        }
+
         public void insert(K key, V value)
         {
             var nnew = new Node
