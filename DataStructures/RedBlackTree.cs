@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace DataStructures
 {
@@ -14,10 +15,19 @@ namespace DataStructures
         public enum Colour { red, black }
 
         Node root = null; // new Node { leaf = true, colour = Colour.black };
+        static Node LEAF = new Node { leaf = true, colour = Colour.black };
+
+        Stopwatch sp;
 
         public RedBlackTree()
         {
+            sp = new Stopwatch();
+            insert_accum = 0;
+            repair_accum = 0;
         }
+
+        long insert_accum;
+        long repair_accum;
 
         public Option<V> search(K key)
         {
@@ -65,8 +75,18 @@ namespace DataStructures
 
         private Node insert(Node root, Node n)
         {
-            insert_recurse(root, n);
+            sp.Reset();
+            sp.Start();
+            //insert_recurse(root, n);
+            insert_loop(root, n);
+            sp.Stop();
+            insert_accum += sp.ElapsedTicks;
+
+            sp.Reset();
+            sp.Start();
             insert_repair(n);
+            sp.Stop();
+            repair_accum += sp.ElapsedTicks;
 
             // we're returning a new root - we better find it first.
             var nroot = n;
@@ -74,6 +94,9 @@ namespace DataStructures
                 nroot = nroot.parent;
             return nroot;
         }
+
+        long insrec_search;
+        long insrec_rest;
 
         private void insert_recurse(Node root, Node n)
         {
@@ -97,8 +120,45 @@ namespace DataStructures
             }
 
             n.parent = root;
-            n.left = new Node { leaf = true, colour = Colour.black };
-            n.right = new Node { leaf = true, colour = Colour.black };
+            n.left = LEAF; // new Node { leaf = true, colour = Colour.black };
+            n.right = LEAF; // new Node { leaf = true, colour = Colour.black };
+            n.colour = Colour.red;
+        }
+
+        private void insert_loop(Node root, Node n)
+        {
+            while (root != null)
+            {
+                if (n.key.CompareTo(root.key) <= 0)
+                {
+                    if (!root.left.leaf)
+                    {
+                        root = root.left;
+                    }
+                    else
+                    {
+                        root.left = n;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (!root.right.leaf)
+                    {
+                        root = root.right;
+
+                    }
+                    else
+                    {
+                        root.right = n;
+                        break;
+                    }
+                }
+            }
+
+            n.parent = root;
+            n.left = LEAF; // new Node { leaf = true, colour = Colour.black };
+            n.right = LEAF; // new Node { leaf = true, colour = Colour.black };
             n.colour = Colour.red;
         }
 
