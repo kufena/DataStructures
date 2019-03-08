@@ -30,36 +30,27 @@ namespace DataStructuresTest
             byte[] tb = Encoding.ASCII.GetBytes(t);
 
             bl.add(sb);
-
-            Console.WriteLine("Can we find \"" + s + "\"? " + bl.check(sb));
-            Console.WriteLine("Can we find \"" + t + "\"? " + bl.check(tb));
-            Assert.Pass();
+            Assert.True(bl.check(sb));
+            Assert.False(bl.check(tb));
         }
 
         [Test]
         public void mass_test()
         {
-            double p = 0.0001;
-            int n = 1000000;
+            double p = 0.001;
+            int n = 1000;
             BloomFilter bl = new BloomFilter(n, p);
 
-            byte[][] data = new byte[1000000][];
+            byte[][] data = new byte[n][];
             Random r = new Random(1001);
-            for(int i = 0; i < 1000000; i++)
-            {
-                data[i] = new byte[20];
-                for(int j = 0; j < 20; j++)
-                {
-                    data[i][j] = (byte)(r.Next(256));
-                }
-            }
-            
+            populate_keys(n, data, r);
+
             Stopwatch sp = new Stopwatch();
             int their = 0;
             int added = 0;
             sp.Start();
 
-            for(int i = 0; i < 1000000; i++)
+            for (int i = 0; i < n; i++)
             {
                 if (!bl.check(data[i]))
                 {
@@ -71,7 +62,23 @@ namespace DataStructuresTest
             }
             sp.Stop();
 
-            Assert.Pass();
+            bool allok = true;
+            for (int i = 0; i < n; i++)
+                allok = allok && bl.check(data[i]);
+
+            Assert.True(allok);
+        }
+
+        private static void populate_keys(int n, byte[][] data, Random r)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                data[i] = new byte[20];
+                for (int j = 0; j < 20; j++)
+                {
+                    data[i][j] = (byte)(r.Next(256));
+                }
+            }
         }
     }
 }

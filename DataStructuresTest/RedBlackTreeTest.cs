@@ -22,7 +22,9 @@ namespace DataStructuresTest
         {
             RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
             tree.insert(1, 100);
-            Assert.Pass();
+            (bool missing, bool equal) = test_for_value(1, 100, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
         }
 
         [Test]
@@ -31,7 +33,17 @@ namespace DataStructuresTest
             RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
             tree.insert(1, 100);
             tree.insert(2, 99);
-            Assert.Pass();
+
+
+            (bool missing, bool equal) = test_for_value(1, 100, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+
+            (missing, equal) = test_for_value(2, 99, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
         }
 
         [Test]
@@ -41,7 +53,19 @@ namespace DataStructuresTest
             tree.insert(1, 100);
             tree.insert(2, 99);
             tree.insert(3, 98);
-            Assert.Pass();
+
+            (bool missing, bool equal) = test_for_value(1, 100, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+
+            (missing, equal) = test_for_value(2, 99, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(3, 98, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
         }
 
         [Test]
@@ -59,7 +83,46 @@ namespace DataStructuresTest
             tree.insert(9, 92);
             tree.insert(10, 91);
 
-            Assert.Pass();
+            (bool missing, bool equal) = test_for_value(1, 100, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+
+            (missing, equal) = test_for_value(2, 99, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(3, 98, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(4, 97, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(5, 96, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(6, 95, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(7, 94, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(8, 93, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(9, 92, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(10, 91, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
         }
 
         [Test]
@@ -78,18 +141,57 @@ namespace DataStructuresTest
             tree.insert(2, 99);
             tree.insert(7, 94);
 
-            Assert.Pass();
+            (bool missing, bool equal) = test_for_value(1, 100, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+
+            (missing, equal) = test_for_value(2, 99, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(3, 98, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(4, 97, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(5, 96, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(6, 95, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(7, 94, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(8, 93, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(9, 92, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
+
+            (missing, equal) = test_for_value(10, 91, tree);
+            Assert.True(!missing);
+            Assert.True(equal);
         }
 
         [Test]
         public void insert_1000_out_of_order()
         {
             RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
-            Dictionary<int, int> dict = new Dictionary<int, int>();
+            //Dictionary<int, int> dict = new Dictionary<int, int>();
 
             Stopwatch sp = new Stopwatch();
 
-            int amount = 10000000;
+            int amount = 1000;
             int count = 0;
             int start = 0;
             int step = 37;
@@ -114,6 +216,7 @@ namespace DataStructuresTest
 
             sp.Reset();
 
+            /*
             sp.Start();
             for (count = 0; count < amount; count++)
             {
@@ -121,8 +224,22 @@ namespace DataStructuresTest
             }
             sp.Stop();
             long dictinterval = sp.ElapsedMilliseconds;
+            */
 
             Assert.Pass();
+        }
+
+        public (bool, bool) test_for_value(int key, int val, RedBlackTree<int, int> tree)
+        {
+            var opt = tree.search(key);
+            bool missing = true;
+            bool equal = false;
+            foreach (var v in opt)
+            {
+                equal = (v == val);
+                missing = false;
+            }
+            return (missing, equal);
         }
     }
 }
