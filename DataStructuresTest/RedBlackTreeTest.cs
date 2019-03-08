@@ -186,12 +186,17 @@ namespace DataStructuresTest
         [Test]
         public void insert_1000_out_of_order()
         {
-            RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
-            //Dictionary<int, int> dict = new Dictionary<int, int>();
-
             Stopwatch sp = new Stopwatch();
 
-            int amount = 1000;
+            sp.Start();
+            RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
+            //Dictionary<int, int> dict = new Dictionary<int, int>();
+            sp.Stop();
+
+            long rbtreecreate = sp.ElapsedMilliseconds;
+            sp.Reset();
+
+            int amount = 10000000;
             int count = 0;
             int start = 0;
             int step = 37;
@@ -226,7 +231,17 @@ namespace DataStructuresTest
             long dictinterval = sp.ElapsedMilliseconds;
             */
 
-            Assert.Pass();
+            for (count = amount - 1; count >= 0; count--)
+            {
+                bool missing = true;
+                var opt = tree.search(keys[count]);
+                foreach(var op in opt)
+                {
+                    missing = false;
+                    Assert.AreEqual(op, vals[count]);
+                }
+                Assert.True(!missing);
+            }
         }
 
         public (bool, bool) test_for_value(int key, int val, RedBlackTree<int, int> tree)
