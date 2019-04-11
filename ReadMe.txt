@@ -6,4 +6,8 @@ Added bloom filter, based on this page: https://www.geeksforgeeks.org/bloom-filt
 
 The skip list implementation is straight out of A Skip List Cookbook by Pugh - it's not concurrent, just the straight forward implementation. I don't particularly like the HEAD and NIL implementation here - I've had to ask for min/max values in the constructor.  Number of levels in the skip list is determined by the Log base 2 of the intended number of items to be stored (passed to the c'tor) - this is L(N) in the paper.
 
+Heap Sort - intrigued as it's essentially build an O(ln N) tree then read them off.  It isn't quite like that, but implemented it anyway.  Seems ok.
+
+Left Leaning Red Black Trees - started reading the new paper by Robert Sedgewick but haven't got very far.  Realised I don't really understand how red/black trees work so will look in to things a bit more first.
+
 To do: some concurrent or non-blocking structures like queues.
