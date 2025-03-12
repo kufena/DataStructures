@@ -4,6 +4,8 @@ using System.Text;
 using NUnit.Framework;
 using DataStructures;
 using System.Diagnostics;
+using System.Formats.Asn1;
+using NUnit.Framework.Legacy;
 
 namespace DataStructuresTest
 {
@@ -30,8 +32,9 @@ namespace DataStructuresTest
             byte[] tb = Encoding.ASCII.GetBytes(t);
 
             bl.add(sb);
-            Assert.True(bl.check(sb));
-            Assert.False(bl.check(tb));
+
+            ClassicAssert.AreEqual(bl.check(sb), true);
+            ClassicAssert.AreEqual(bl.check(tb), false);
         }
 
         [Test]
@@ -66,7 +69,7 @@ namespace DataStructuresTest
             for (int i = 0; i < n; i++)
                 allok = allok && bl.check(data[i]);
 
-            Assert.True(allok);
+            ClassicAssert.AreEqual(true, allok); 
         }
 
         private static void populate_keys(int n, byte[][] data, Random r)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using DataStructures;
 
 namespace DataStructuresTest
@@ -31,7 +32,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for(int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 
@@ -42,7 +43,7 @@ namespace DataStructuresTest
             int[] arr = new int[] {};
             int[] done = new int[] {};
             hs.Sort(arr, new mycomparer());
-            Assert.AreEqual(arr.Length, 0);
+            ClassicAssert.AreEqual(arr.Length, 0);
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for (int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 
@@ -67,7 +68,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for (int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 
@@ -80,7 +81,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for (int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 
@@ -108,7 +109,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for (int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 
@@ -127,7 +128,7 @@ namespace DataStructuresTest
             hs.Sort(arr, new mycomparer());
             for (int i = 0; i < arr.Length; i++)
             {
-                Assert.AreEqual(arr[i], done[i]);
+                ClassicAssert.AreEqual(arr[i], done[i]);
             }
         }
 

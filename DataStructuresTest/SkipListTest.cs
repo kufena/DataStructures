@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using DataStructures;
 using System.Diagnostics;
 
@@ -85,9 +86,9 @@ namespace DataStructuresTest
             for (int i = 0; i < n; i++) tot += times[i];
             double avg = tot / n;
 
-            Assert.AreEqual(clash, mismatch);
-            Assert.AreEqual(ok, match);
-            Assert.AreEqual(0, missing);
+            ClassicAssert.AreEqual(clash, mismatch);
+            ClassicAssert.AreEqual(ok, match);
+            ClassicAssert.AreEqual(0, missing);
             
         }
     }

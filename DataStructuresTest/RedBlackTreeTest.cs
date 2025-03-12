@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using DataStructures;
 using System.Diagnostics;
 
@@ -23,8 +24,8 @@ namespace DataStructuresTest
             RedBlackTree<int, int> tree = new RedBlackTree<int, int>();
             tree.insert(1, 100);
             (bool missing, bool equal) = test_for_value(1, 100, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true, !missing);
+            ClassicAssert.AreEqual(true, equal);
         }
 
         [Test]
@@ -36,13 +37,13 @@ namespace DataStructuresTest
 
 
             (bool missing, bool equal) = test_for_value(1, 100, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true, !missing);  
+            ClassicAssert.AreEqual(true,equal);     
 
 
             (missing, equal) = test_for_value(2, 99, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
         }
 
@@ -55,17 +56,17 @@ namespace DataStructuresTest
             tree.insert(3, 98);
 
             (bool missing, bool equal) = test_for_value(1, 100, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
 
             (missing, equal) = test_for_value(2, 99, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(3, 98, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
         }
 
         [Test]
@@ -84,45 +85,45 @@ namespace DataStructuresTest
             tree.insert(10, 91);
 
             (bool missing, bool equal) = test_for_value(1, 100, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
 
             (missing, equal) = test_for_value(2, 99, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(3, 98, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(4, 97, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(5, 96, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(6, 95, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(7, 94, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(8, 93, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(9, 92, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(10, 91, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
         }
 
         [Test]
@@ -142,45 +143,45 @@ namespace DataStructuresTest
             tree.insert(7, 94);
 
             (bool missing, bool equal) = test_for_value(1, 100, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
 
             (missing, equal) = test_for_value(2, 99, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(3, 98, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(4, 97, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(5, 96, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(6, 95, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(7, 94, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(8, 93, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(9, 92, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
 
             (missing, equal) = test_for_value(10, 91, tree);
-            Assert.True(!missing);
-            Assert.True(equal);
+            ClassicAssert.AreEqual(true,!missing);
+            ClassicAssert.AreEqual(true,equal);
         }
 
         [Test]
@@ -238,9 +239,9 @@ namespace DataStructuresTest
                 foreach(var op in opt)
                 {
                     missing = false;
-                    Assert.AreEqual(op, vals[count]);
+                    ClassicAssert.AreEqual(op, vals[count]);
                 }
-                Assert.True(!missing);
+                ClassicAssert.AreEqual(true,!missing);
             }
         }
 
